@@ -1,4 +1,7 @@
+require 'rack-flash'
 class ItemsController < ApplicationController 
+    enable :sessions
+    use Rack::Flash
 
   get '/items' do
     redirect_if_not_logged_in
@@ -16,8 +19,13 @@ class ItemsController < ApplicationController
   end
 
   post '/items/new' do
-    Item.create(:name => params[:name], :list_id => params[:list_id])
-    redirect '/items'
+    @item = Item.create(:name => params[:name], :list_id => params[:list_id])
+    if @item.valid?
+      redirect '/items'
+    else
+      flash[:message] = "Please fill out all the required fields"
+        redirect '/items/new'
+      end
     end
 
   # Update Action
