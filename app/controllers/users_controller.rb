@@ -1,17 +1,28 @@
+require 'rack-flash'
+
 class UsersController < ApplicationController
+  enable :sessions
+  use Rack::Flash
 
   get '/signup' do 
-    if !session[:user_id]
+    if !logged_in?
       erb :"users/create_user"
     else
       redirect "/lists"
     end
   end
 
-  post '/signup' do
-    @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
-    @user.save
-    session[:user_id] = @user.id
+  # Tried putting a validates_presence_of in controller, but I get a no method error
+  post '/signup' do  
+    @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
+    # binding.pry
+    if @user.valid?
+      flash[:message] = "Congrats! You've signed up!"
+      session[:user_id] = @user.id
+    else
+     flash[:message] = "Please fill out all the required fields"
+    end
+    
     redirect "/"
   end
 
