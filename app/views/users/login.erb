@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
 <h2>Log In to Your Account</h2>
 
 <form action="/login" method="post">
@@ -5,6 +9,7 @@
     <label class="sr-only" for="username">Username</label>
     <input type="text" class="form-control" name="username" id="Username" placeholder="Username">
   </div>
+  
   <div class="form-group">
     <label class="sr-only" for="exampleInputPassword3">Password</label>
     <input type="password" class="form-control" name="password" id="password" placeholder="Password">
