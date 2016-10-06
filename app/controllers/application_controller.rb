@@ -24,8 +24,9 @@ class ApplicationController < Sinatra::Base
       !!session[:user_id]
     end
 
+    # Memoization
     def current_user
-      User.find(session[:user_id])
+      @current_user ||= User.find_by_id(session[:user_id])
     end
   end
   
