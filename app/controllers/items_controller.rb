@@ -15,6 +15,10 @@ class ItemsController < ApplicationController
     erb :'/items/new'
   end
 
- 
+  post '/items/new' do
+    Item.create(:name => params[:name], :list_id => params[:list_id])
+    redirect '/items'
+    end
 
+ 
 end
