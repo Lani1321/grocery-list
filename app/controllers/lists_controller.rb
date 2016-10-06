@@ -23,4 +23,28 @@ class ListsController < ApplicationController
     redirect "/lists"
     end
 
+  # Update Action
+  get '/lists/:id/edit' do
+    if logged_in?
+      @list = List.find_by_id(params[:id])
+      if @list.user_id == session[:user_id]
+       erb :'lists/edit'
+      else
+        redirect to '/lists'
+      end
+    else
+      redirect to '/login'
+    end
+  end
+  
+
+  patch '/lists/:id' do
+    @list = List.find_by_id(params[:id])
+    @list.name = params[:name]
+    @list.save
+    redirect "/lists"
+  end
+
+ 
+
 end
