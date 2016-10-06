@@ -33,5 +33,16 @@ class ItemsController < ApplicationController
     redirect '/items'
   end
 
-  
+  # Delete action
+  get '/items/:id/delete' do 
+    @item = Item.find_by_id(params[:id])
+    erb :'/items/delete'
+  end
+
+  delete '/items/:id' do 
+    @item = Item.find_by_id(params[:id])
+    @item.destroy
+    redirect '/items'
+  end
+
 end
