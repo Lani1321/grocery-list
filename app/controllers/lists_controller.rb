@@ -18,7 +18,7 @@ class ListsController < ApplicationController
 
 
   post '/lists/new' do
-    # @list = current_user.lists.create(content: params[:name])
+    # @list = current_user.lists.create(content: params[:content])
     @list = List.create(:name => params[:name], :user_id => current_user.id)
     @list.items.create(:name => params[:item])
     redirect "/lists"
@@ -28,7 +28,7 @@ class ListsController < ApplicationController
   get '/lists/:id/edit' do
     if logged_in?
       @list = List.find_by_id(params[:id])
-      if @list.user_id == current_user
+      if @list.user_id == session[:user_id]
        erb :'lists/edit'
       else
         redirect to '/lists'
