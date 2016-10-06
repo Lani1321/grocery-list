@@ -20,5 +20,18 @@ class ItemsController < ApplicationController
     redirect '/items'
     end
 
- 
+  # Update Action
+  get '/items/:id/edit' do
+    @item = Item.find_by_id(params[:id])
+      erb :'/items/edit'
+  end
+
+  patch '/items/:id' do
+    @item = Item.find_by_id(params[:id])
+    @item.name = params[:name]
+    @item.save
+    redirect '/items'
+  end
+
+  
 end
