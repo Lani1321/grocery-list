@@ -1,0 +1,17 @@
+<h1>Hello <%= current_user.username %>!</h1>
+<h1>Here are your lists:</h1>
+<br>
+
+  
+<% @lists.each do |list|%>
+  <% if list.user_id == @user.id %>
+    <h2><b><%= list.name %></i> </b><a href="/lists/<%=list.id%>/edit" class="btn btn-default btn-xs" role="button">Edit List</a></h2>
+        
+
+    <% list.items.each do |item| %>
+      <h4><span class="glyphicon glyphicon-ok-circle m-r-xs"></span><%= item.name %>  
+      </h4> 
+    <% end %>
+  <% end %>
+<% end %>
+
