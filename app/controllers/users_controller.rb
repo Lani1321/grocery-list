@@ -12,19 +12,20 @@ class UsersController < ApplicationController
     end
   end
 
-  # Tried putting a validates_presence_of in controller, but I get a no method error
   post '/signup' do  
     @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
-    # binding.pry
     if @user.valid?
       flash[:message] = "Congrats! You've signed up!"
       session[:user_id] = @user.id
-    else
+    elsif
      flash[:message] = "Please fill out all the required fields"
+        redirect "/signup"
+    elsif
+      flash[:error] = "Uh-oh, someone already has that username, please choose another"
+      
     end
-    
-    redirect "/"
   end
+
 
   get '/login' do
     if !logged_in?
@@ -40,7 +41,8 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect "/"
     else
-      redirect to '/signup'
+    flash[:message] = "Oops! You need both username and password to login"
+      redirect to '/login'
     end
   end
 
@@ -51,8 +53,6 @@ class UsersController < ApplicationController
     else
       redirect '/'
      end
-
   end
-
 
 end
