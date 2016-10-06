@@ -19,4 +19,39 @@
 
   </style>
 
-  
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span> 
+        </button>
+        <a class="navbar-brand" href="/">Don't forget the eggs</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+       
+       <% if logged_in? %>
+        <li><a href="/lists/new">Create New List</a></li>
+        <li><a href="/items/new">Add New Item to List</a></li>
+        <li><a href="/lists">See All of My Lists</a></li>
+        <li><a href="/logout">Log Out</a></li>
+
+        <% else %>
+        <li><a href="/login">Log In</a></li>
+        <li><a href="/signup">Sign Up</a></li>
+        <% end %>
+      </ul>
+      </div>
+     </div>
+  </nav>
+    <div class=" col-xs-offset-2">
+
+  <%= yield %> 
+
+    </div>
+  </div>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+</html>
