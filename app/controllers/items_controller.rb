@@ -1,7 +1,5 @@
-require 'rack-flash'
+
 class ItemsController < ApplicationController 
-    enable :sessions
-    use Rack::Flash
 
   get '/items' do
     redirect_if_not_logged_in
@@ -23,10 +21,10 @@ class ItemsController < ApplicationController
     if @item.valid?
       redirect '/items'
     else
-      flash[:message] = "Please fill out all the required fields"
+      flash[:message] = "You're last item did not get added. Please fill out all the required fields"
         redirect '/items/new'
-      end
     end
+  end
 
   # Update Action
   get '/items/:id/edit' do
