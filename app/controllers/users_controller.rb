@@ -17,12 +17,10 @@ class UsersController < ApplicationController
     if @user.valid?
       flash[:message] = "Congrats! You've signed up!"
       session[:user_id] = @user.id
-    elsif
-     flash[:message] = "Please fill out all the required fields"
+        redirect '/lists'
+    else
+      flash[:message] = "Please fill out all the required fields"
         redirect "/signup"
-    elsif
-      flash[:error] = "Uh-oh, someone already has that username, please choose another"
-      
     end
   end
 
