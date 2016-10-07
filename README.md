@@ -4,7 +4,7 @@ Welcome!  Don't forget the eggs is a standard Sinatra Web App.  It allows a user
 
 ## To run this app: 
 
-- Fork and clone this repo 
+- Clone this repo 
 - Run bundle Install 
 - Run rake db:migrate
 - Type 'shotgun' in your terminal 
