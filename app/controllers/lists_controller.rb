@@ -1,8 +1,4 @@
-require 'rack-flash'
-
 class ListsController < ApplicationController
-  enable :sessions
-  use Rack::Flash
 
   # Index Action
   get '/lists' do
