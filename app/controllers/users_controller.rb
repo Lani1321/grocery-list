@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   post '/signup' do  
     @user = User.create(:username => params[:username], :email => params[:email], :password => params[:password])
     if @user.valid?
-      flash[:message] = "Congrats! You've signed up!"
+      # flash[:message] = "Congrats! You've signed up!"
       session[:user_id] = @user.id
         redirect '/lists'
     else
