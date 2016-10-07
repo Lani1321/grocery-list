@@ -1,14 +1,14 @@
 # Dont forget the eggs! #
 
-Welcome!  Don't forget the eggs is a standard Sinatra Web App.  It allows a user to add multiple grocery lists in case you need a separate list for every event in your life like I do.  Whether it's for your weekly grocery shopping or a crocery list for a BBQ or a Birthday Party. You can add, edit, or delete a list and add items as you plesae! Try it out and see for yourself!
+Welcome!  Don't forget the eggs is a standard Sinatra Web App.  It allows a user to add multiple grocery lists in case you need a separate list for every event in your life like I do.  Whether it's for your weekly grocery shopping or a grocery list for a BBQ or a Birthday Party. You can add, edit, or delete a list and add items as you please! Try it out and see for yourself!
 
-## To run this app: ## 
+## To run this app: 
 
--Fork and clone this repo 
--Run bundle Install 
--Run rake db:migrate
--Type 'shotgun' in your terminal 
--Navigate to localhost9393 to start making a grocery list!
+- Fork and clone this repo 
+- Run bundle Install 
+- Run rake db:migrate
+- Type 'shotgun' in your terminal 
+- Navigate to localhost9393 to start making a grocery list!
 
 ## Contributing ##
 Bug reports and pull requests are welcome. If you see an opportunity for improvement go ahead and use a typical git workflow: 
