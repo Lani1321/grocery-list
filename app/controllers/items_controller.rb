@@ -1,6 +1,10 @@
+require 'sinatra/base'
+require 'rack-flash'
 
 class ItemsController < ApplicationController 
-
+  enable :sessions
+  use Rack::Flash
+  
   get '/items' do
     redirect_if_not_logged_in
     @user = current_user
