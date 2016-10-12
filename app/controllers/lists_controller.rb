@@ -13,7 +13,7 @@ class ListsController < ApplicationController
     redirect_if_not_logged_in
     @user = current_user
     @lists = List.all   #i don't think I need this line
-    erb :'/lists/create_list'
+    erb :'/lists/new'
   end
 
 
