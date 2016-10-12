@@ -12,19 +12,18 @@ class ListsController < ApplicationController
   get '/lists/new' do
     redirect_if_not_logged_in
     @user = current_user
-    @lists = List.all   #i don't think I need this line
+    @lists = List.all  
     erb :'/lists/new'
   end
 
 
   post '/lists/new' do
-    # @list = current_user.lists.create(content: params[:content])
     @list = List.create(:name => params[:name], :user_id => current_user.id)
     @list.items.create(:name => params[:item])
     redirect "/lists"
     end
 
-  # Update Action
+ 
   get '/lists/:id/edit' do
     if logged_in?
       @list = List.find_by_id(params[:id])
@@ -38,7 +37,7 @@ class ListsController < ApplicationController
     end
   end
   
-
+  # Update Action
   patch '/lists/:id' do
     @list = List.find_by_id(params[:id])
     @list.name = params[:name]
