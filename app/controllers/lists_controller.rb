@@ -5,30 +5,31 @@ class ListsController < ApplicationController
     redirect_if_not_logged_in
     @user = current_user
     @lists = @user.lists
-    erb :'lists/show'
+    erb :'lists/index'
   end
 
   # Create Action
   get '/lists/new' do
     redirect_if_not_logged_in
     @user = current_user
-    @lists = List.all  
+    # Do I need the line below?
+    # @lists = List.all  
     erb :'/lists/new'
   end
 
 
   post '/lists/new' do
-    @list = List.create(:name => params[:name], :user_id => current_user.id)
-    @list.items.create(:name => params[:item])
+    list = List.create(:name => params[:name], :user_id => current_user.id)
+    list.items.create(:name => params[:item])
     redirect "/lists"
     end
 
  
   get '/lists/:id/edit' do
-    if logged_in?
-      @list = List.find_by_id(params[:id])
-      if @list.user_id == session[:user_id]
-       erb :'lists/edit'
+    if logged_in? 
+      # @list = List.find(params[:id])
+      if @list = current_user.lists.find_by(params[:id]) 
+       erb :'lists/show'
       else
         redirect to '/lists'
       end
@@ -39,22 +40,22 @@ class ListsController < ApplicationController
   
   # Update Action
   patch '/lists/:id' do
-    @list = List.find_by_id(params[:id])
+    @list = List.find(params[:id])
     @list.name = params[:name]
     @list.save
     redirect "/lists"
   end
 
   # Delete 
-  get '/lists/:id/delete' do 
-    @user = current_user
-    @list = List.find_by_id(params[:id])
-    erb :'/lists/delete'
-  end
+  # get '/lists/:id/delete' do 
+  #   @user = current_user
+  #   @list = List.find(params[:id]) #=> 
+  #   erb :'/lists/delete'
+  # end
 
   delete '/lists/:id' do 
     @user = current_user
-    @list = List.find_by_id(params[:id])
+    @list = List.find(params[:id])
     @list.destroy
     redirect '/lists'
   end
