@@ -9,21 +9,20 @@ class ItemsController < ApplicationController
     redirect_if_not_logged_in
     @user = current_user
     @lists = @user.lists
-    erb :'items/show'
+    erb :'items/index'
   end
 
   # Create Action
   get '/items/new' do
     redirect_if_not_logged_in
     @user = current_user
-    # @lists = List.all
     @lists = current_user.lists
     erb :'/items/new'
   end
 
   post '/items/new' do
-    @item = Item.create(:name => params[:name], :list_id => params[:list_id])
-    if @item.valid?
+    item = Item.create(:name => params[:name], :list_id => params[:list_id])
+    if item.valid?
       redirect '/items'
     else
       flash[:message] = "You're last item did not get added. Please fill out all the required fields"
@@ -34,7 +33,7 @@ class ItemsController < ApplicationController
   # Update Action
   get '/items/:id/edit' do
     @item = Item.find_by_id(params[:id])
-      erb :'/items/edit'
+      erb :'/items/show'
   end
 
   patch '/items/:id' do
